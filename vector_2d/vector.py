@@ -35,24 +35,39 @@ class Vector(object):
     def __mul__(self, scalar):
         return Vector(self.__x * scalar, self.__y * scalar)
 
-    def get_unit(self):
+    def unit(self):
+        """
+        Returns the unit vector correspondent to the original one
+        """
         module = float(abs(self))
         if module == 0:
             module = 99999999
         return Vector(self.__x / float(module), self.__y / float(module))
 
     def get_comps(self, f=True):
+        """
+        Returns a tuble qith the vector components
+        Float by default, integer when f=False
+        :param f: bool
+        :return: tuple with the vector components
+        """
         if f:
             return self.__x, self.__y
         return int(self.__x), int(self.__y)
 
     def set_comp(self, comp, value):
+        """
+        A function se set component value via numerical index
+        0 = x
+        1 = y
+        """
         if comp == 0:
             self.__x = value
         else:
             self.__y = value
 
     def __neg__(self):
+        """ unary minus overridden """
         return Vector(-self.__x, -self.__y)
 
     def __call__(self, comp=None):
