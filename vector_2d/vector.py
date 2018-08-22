@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from math import hypot, cos, sin
+from math import atan, hypot
 
 
 class Vector(object):
@@ -79,3 +79,10 @@ class Vector(object):
         if other.x == self.__x and other.y == self.__y:
             return True
         return False
+
+    def __iter__(self):
+        return (i for i in (self.x, self.y))
+
+    def to_polar(self):
+        from vectorPolar import VectorPolar
+        return VectorPolar(abs(self), atan(self.__y / self.__x))
