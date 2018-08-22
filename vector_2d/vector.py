@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from math import atan, hypot
+from math import atan2, hypot, pi
 
 
 class Vector(object):
@@ -84,5 +84,9 @@ class Vector(object):
         return (i for i in (self.x, self.y))
 
     def to_polar(self):
+        """ converts the vector to polar coordinates """
         from vectorPolar import VectorPolar
-        return VectorPolar(abs(self), atan(self.__y / self.__x))
+        angle = atan2(self.__y, self.__x)
+        if angle < 0:
+            angle = 2 * pi + angle
+        return VectorPolar(abs(self), angle)

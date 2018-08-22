@@ -7,7 +7,7 @@ import math
 
 
 def round_vector(vector):
-    return Vector(round(vector.x, 5), round(vector.y, 5))
+    return vector.__class__(*(round(attribute, 5) for attribute in vector))
 
 
 class TestVector(unittest.TestCase):
@@ -67,5 +67,31 @@ class TestVector(unittest.TestCase):
         self.assertEqual(vector(1), 2)
 
     def test_conversion_to_cartesian(self):
-        self.assertEqual(Vector(0, 1), round_vector(VectorPolar(1, math.pi / 2.0).to_cartesian()))
-        self.assertEqual(Vector(1, 0), round_vector(VectorPolar(1, 0).to_cartesian()))
+        self.assertEqual(round_vector(VectorPolar(1, 0).to_cartesian()), Vector(1, 0))
+        self.assertEqual(round_vector(VectorPolar(1, math.pi / 2.0).to_cartesian()), Vector(0, 1))
+        self.assertEqual(round_vector(VectorPolar(1, math.pi).to_cartesian()), Vector(-1, 0))
+        self.assertEqual(round_vector(VectorPolar(1, 3 * math.pi / 2.0).to_cartesian()), Vector(0, -1))
+        self.assertEqual(round_vector(VectorPolar(1, 2 * math.pi).to_cartesian()), Vector(1, 0))
+
+    def test_iter_cartesian(self):
+        tup = (5, 4)
+        vector = Vector(*tup)
+        for i, attribute in enumerate(vector):
+            self.assertEqual(tup[i], attribute)
+
+    def test_iter_polar(self):
+        tup = (5, math.pi)
+        vector = VectorPolar(*tup)
+        for i, attribute in enumerate(vector):
+            self.assertEqual(tup[i], attribute)
+
+    def test_conversion_to_polar(self):
+        self.assertEqual(round_vector(Vector(1, 0).to_polar()), VectorPolar(1, 0))
+        self.assertEqual(Vector(0, 1).to_polar(), VectorPolar(1, math.pi / 2.0))
+        self.assertEqual(Vector(0, -1).to_polar(), VectorPolar(1, 3 * math.pi / 2.0))
+
+        vector = Vector(13, 23)
+        self.assertEqual(vector, round_vector(vector.to_polar().to_cartesian()))
+
+        vector = VectorPolar(56, 1)
+        self.assertEqual(vector, round_vector(vector.to_cartesian().to_polar()))
