@@ -9,7 +9,7 @@ class Vector(object):
         self.y = y
 
     def __repr__(self):
-        return 'Vector(%r, %r)' % (self.x, self.y)
+        return type(self).__name__ + '(%r, %r)' % (self.x, self.y)
 
     def __abs__(self):
         return hypot(self.x, self.y)
@@ -52,19 +52,7 @@ class Vector(object):
             return self.get_comps()
         return self.get_comps()[comp]
 
-    def _eq__(self, other):
+    def __eq__(self, other):
         if other.x == self.x and other.y == self.y:
             return True
         return False
-
-
-class VectorPolar(object):
-    def __init__(self, module, argument):
-        self.module = module
-        self.argument = argument
-
-    def to_cartesian(self):
-        return Vector(cos(self.argument), sin(self.argument)) * self.module
-
-    def __repr__(self):
-        return 'VectorPolar(%r, %r)' % (self.module, self.argument)
