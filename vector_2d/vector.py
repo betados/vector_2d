@@ -39,7 +39,7 @@ class Vector(object):
         """
         Returns the unit vector correspondent to the original one
         """
-        module = float(abs(self))
+        module = abs(self)
         if module == 0:
             module = 99999999
         return Vector(self.__x / float(module), self.__y / float(module))
