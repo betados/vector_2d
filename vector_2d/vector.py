@@ -83,6 +83,9 @@ class Vector(object):
     def __iter__(self):
         return (i for i in (self.x, self.y))
 
+    def int(self):
+        return int(self.__x), int(self.__y)
+
     def to_polar(self):
         """ converts the vector to polar coordinates """
         from vectorPolar import VectorPolar

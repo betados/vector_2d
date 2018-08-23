@@ -95,3 +95,7 @@ class TestVector(unittest.TestCase):
 
         vector = VectorPolar(56, 1)
         self.assertEqual(vector, round_vector(vector.to_cartesian().to_polar()))
+
+    def test_int(self):
+        self.assertEqual(Vector(3, 5).int(), (3, 5))
+        self.assertEqual(Vector(3.2, 5.1).int(), (3, 5))
