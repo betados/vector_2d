@@ -4,9 +4,9 @@ from setuptools import setup
 
 setup(
     name='vector_2d',
-    version='0.0.3',
+    version='0.0.4',
     description='A module witch implements a two-dimensional vector, both in cartesian and polar coordinates.',
-    long_description='A module witch implements a two-dimensional vector, both in cartesian and polar coordinates.',
+    long_description=open('README.MD').read(),
     license='MIT',
     packages=['vector_2D'],
     author='Álvaro Torres Ochaita',
