@@ -30,3 +30,6 @@ class VectorPolar(object):
 
     def __iter__(self):
         return (i for i in (self.__module, self.__angle))
+
+    def unit(self):
+        return VectorPolar(1, self.__angle)
