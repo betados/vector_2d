@@ -3,5 +3,12 @@ A module witch implements a two-dimensional vector, both in cartesian and polar 
 
 ## Installation
 
- `pip install vector-2d`
+ ```bash
+ pip install vector-2d
+ ```
 
+## Usage
+``` python
+from vector_2D.vector import Vector
+from vector_2D.vectorPolar import VectorPolar
+```
