@@ -45,8 +45,10 @@ class Vector(object):
         return Vector(self.__x / float(module), self.__y / float(module))
 
     def get_comps(self, f=True):
+        # TODO hacer que si se construye con valores enteros siempre devuelva valores enteros
+        # TODO hacer que si se construye con valores float siempre devuelva valores float
         """
-        Returns a tuble qith the vector components
+        Returns a tuple with the vector components
         Float by default, integer when f=False
         :param f: bool
         :return: tuple with the vector components
@@ -93,3 +95,5 @@ class Vector(object):
         if angle < 0:
             angle = 2 * pi + angle
         return VectorPolar(abs(self), angle)
+
+    # TODO hacer un classmethod que cree el vector entre dos puntos
