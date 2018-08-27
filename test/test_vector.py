@@ -13,6 +13,7 @@ def round_vector(vector):
 class TestVector(unittest.TestCase):
     def test_repr(self):
         self.assertEqual(str(Vector(0, 0)), 'Vector(0, 0)')
+        self.assertEqual(str(VectorPolar(0, 0)), 'VectorPolar(0, 0)')
 
     def test_abs(self):
         self.assertEqual(abs(Vector(0, 0)), 0)
@@ -99,3 +100,6 @@ class TestVector(unittest.TestCase):
     def test_int(self):
         self.assertEqual(Vector(3, 5).int(), (3, 5))
         self.assertEqual(Vector(3.2, 5.1).int(), (3, 5))
+
+    def test_div(self):
+        self.assertEqual(Vector(5, 5) / 2, Vector(2.5, 2.5))

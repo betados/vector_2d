@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import division
+
 from math import atan2, hypot, pi
 
 
@@ -34,6 +36,9 @@ class Vector(object):
 
     def __mul__(self, scalar):
         return Vector(self.__x * scalar, self.__y * scalar)
+
+    def __div__(self, scalar):
+        return Vector(self.__x / scalar, self.__y / scalar)
 
     def unit(self):
         """
