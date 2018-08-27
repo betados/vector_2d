@@ -1,6 +1,8 @@
 # VECTOR
 A module witch implements a two-dimensional vector, both in cartesian and polar coordinates.
 
+[![Downloads](http://pepy.tech/badge/vector-2d)](http://pepy.tech/project/vector-2d)
+
 ## Installation
 
  ```bash
