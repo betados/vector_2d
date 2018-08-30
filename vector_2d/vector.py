@@ -102,3 +102,11 @@ class Vector(object):
         return VectorPolar(abs(self), angle)
 
     # TODO hacer un classmethod que cree el vector entre dos puntos
+
+
+def round_vector(vector, decimal_places=5):
+    """"
+        Return a vector with its components rounded.
+        It allow compare vectors ignoring precision errors due to how floats numbers are stored as binaries
+    """
+    return vector.__class__(*(round(attribute, decimal_places) for attribute in vector))

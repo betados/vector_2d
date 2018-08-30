@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from vector_2d.vector import Vector
+from vector_2d.vector import Vector, round_vector
 from vector_2d.vectorPolar import VectorPolar
 import math
-
-
-def round_vector(vector):
-    return vector.__class__(*(round(attribute, 5) for attribute in vector))
 
 
 class TestVector(unittest.TestCase):
