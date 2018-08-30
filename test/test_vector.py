@@ -114,3 +114,9 @@ class TestVector(unittest.TestCase):
 
         self.assertEqual(angle(Vector(-1, -1), Vector(-1, 0)), pi / 4)
         self.assertEqual(angle(Vector(-1, 0), Vector(-1, 1)), pi / 4)
+
+    def test_pow(self):
+        self.assertEqual(Vector(5, 3) * 5 * 5, Vector(5, 3) ** 5)
+
+    def test_rmul(self):
+        self.assertEqual(0.5 * Vector(2, 2), Vector(1, 1))

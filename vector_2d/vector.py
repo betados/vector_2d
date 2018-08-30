@@ -37,6 +37,14 @@ class Vector(object):
     def __mul__(self, scalar):
         return Vector(self.__x * scalar, self.__y * scalar)
 
+    def __rmul__(self, scalar):
+        return self * scalar
+
+    def __pow__(self, power, modulo=None):
+        if modulo:
+            raise NotImplementedError
+        return (self * power) * power
+
     def __div__(self, scalar):
         return Vector(self.__x / scalar, self.__y / scalar)
 
