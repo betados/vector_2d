@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from vector_2d.vector import Vector, round_vector
+from math import pi
+
+from vector_2d.vector import Vector, angle, round_vector
 from vector_2d.vectorPolar import VectorPolar
-import math
 
 
 class TestVector(unittest.TestCase):
@@ -65,10 +66,10 @@ class TestVector(unittest.TestCase):
 
     def test_conversion_to_cartesian(self):
         self.assertEqual(round_vector(VectorPolar(1, 0).to_cartesian()), Vector(1, 0))
-        self.assertEqual(round_vector(VectorPolar(1, math.pi / 2.0).to_cartesian()), Vector(0, 1))
-        self.assertEqual(round_vector(VectorPolar(1, math.pi).to_cartesian()), Vector(-1, 0))
-        self.assertEqual(round_vector(VectorPolar(1, 3 * math.pi / 2.0).to_cartesian()), Vector(0, -1))
-        self.assertEqual(round_vector(VectorPolar(1, 2 * math.pi).to_cartesian()), Vector(1, 0))
+        self.assertEqual(round_vector(VectorPolar(1, pi / 2.0).to_cartesian()), Vector(0, 1))
+        self.assertEqual(round_vector(VectorPolar(1, pi).to_cartesian()), Vector(-1, 0))
+        self.assertEqual(round_vector(VectorPolar(1, 3 * pi / 2.0).to_cartesian()), Vector(0, -1))
+        self.assertEqual(round_vector(VectorPolar(1, 2 * pi).to_cartesian()), Vector(1, 0))
 
     def test_iter_cartesian(self):
         tup = (5, 4)
@@ -77,15 +78,15 @@ class TestVector(unittest.TestCase):
             self.assertEqual(tup[i], attribute)
 
     def test_iter_polar(self):
-        tup = (5, math.pi)
+        tup = (5, pi)
         vector = VectorPolar(*tup)
         for i, attribute in enumerate(vector):
             self.assertEqual(tup[i], attribute)
 
     def test_conversion_to_polar(self):
         self.assertEqual(round_vector(Vector(1, 0).to_polar()), VectorPolar(1, 0))
-        self.assertEqual(Vector(0, 1).to_polar(), VectorPolar(1, math.pi / 2.0))
-        self.assertEqual(Vector(0, -1).to_polar(), VectorPolar(1, 3 * math.pi / 2.0))
+        self.assertEqual(Vector(0, 1).to_polar(), VectorPolar(1, pi / 2.0))
+        self.assertEqual(Vector(0, -1).to_polar(), VectorPolar(1, 3 * pi / 2.0))
 
         vector = Vector(13, 23)
         self.assertEqual(vector, round_vector(vector.to_polar().to_cartesian()))
@@ -99,3 +100,17 @@ class TestVector(unittest.TestCase):
 
     def test_div(self):
         self.assertEqual(Vector(5, 5) / 2, Vector(2.5, 2.5))
+
+    def test_angle(self):
+        self.assertEqual(angle(Vector(1, 0)), 0)
+        self.assertEqual(angle(Vector(1, 0), Vector(1, 0)), 0)
+        self.assertEqual(angle(Vector(1, 1), Vector(1, 0)), pi / 4)
+        self.assertEqual(angle(Vector(0, 1), Vector(1, 0)), pi / 2)
+        self.assertEqual(angle(Vector(-1, 1), Vector(1, 0)), 3 * pi / 4)
+        self.assertEqual(angle(Vector(-1, 0), Vector(1, 0)), pi)
+        self.assertEqual(angle(Vector(-1, -1), Vector(1, 0)), 5 * pi / 4)
+        self.assertEqual(angle(Vector(0, -1), Vector(1, 0)), 3 * pi / 2)
+        self.assertEqual(angle(Vector(1, -1), Vector(1, 0)), 7 * pi / 4)
+
+        self.assertEqual(angle(Vector(-1, -1), Vector(-1, 0)), pi / 4)
+        self.assertEqual(angle(Vector(-1, 0), Vector(-1, 1)), pi / 4)

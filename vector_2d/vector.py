@@ -110,3 +110,15 @@ def round_vector(vector, decimal_places=5):
         It allow compare vectors ignoring precision errors due to how floats numbers are stored as binaries
     """
     return vector.__class__(*(round(attribute, decimal_places) for attribute in vector))
+
+
+def angle(first, second=Vector(1, 0)):
+    """
+        Returns the angle in radians between the two given vectors.
+        If only one is give the return is the angle between this and the horizontal.
+    """
+    angles = [atan2(*reversed(first.get_comps())), atan2(*reversed(second.get_comps()))]
+    for i in (0, 1):
+        if angles[i] < 0:
+            angles[i] = 2 * pi + angles[i]
+    return max(angles) - min(angles)
