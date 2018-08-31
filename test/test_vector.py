@@ -3,7 +3,7 @@
 import unittest
 from math import pi
 
-from vector_2d.vector import Vector, angle, round_vector
+from vector_2d.vector import Vector, angle, round_vector, distance_line_point
 from vector_2d.vectorPolar import VectorPolar
 
 
@@ -120,3 +120,9 @@ class TestVector(unittest.TestCase):
 
     def test_rmul(self):
         self.assertEqual(0.5 * Vector(2, 2), Vector(1, 1))
+
+    def test_distance_line_point(self):
+        self.assertEqual(distance_line_point(Vector(5, 1), (Vector(), Vector(100, 0))), 1)
+        self.assertEqual(distance_line_point(Vector(5, 2), (Vector(), Vector(100, 0))), 2)
+        self.assertEqual(distance_line_point(Vector(100, 2), (Vector(), Vector(100, 0))), 2)
+        self.assertEqual(distance_line_point(Vector(110, 2), (Vector(), Vector(100, 0))), 2)

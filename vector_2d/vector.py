@@ -130,3 +130,13 @@ def angle(first, second=Vector(1, 0)):
         if angles[i] < 0:
             angles[i] = 2 * pi + angles[i]
     return max(angles) - min(angles)
+
+
+def distance_line_point(point, line):
+    p1, p2 = line
+    return abs((p2.y - p1.y) * point.x - (p2.x - p1.x) * point.y + p2.x * p1.y - p2.y * p1.x) / abs(p1 - p2)
+
+
+def distance_segment_point(point, line):
+    raise NotImplementedError
+#     TODO ver si está "dentro" o "fuera" del segmento
