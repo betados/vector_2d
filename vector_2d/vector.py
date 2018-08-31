@@ -109,6 +109,9 @@ class Vector(object):
             angle = 2 * pi + angle
         return VectorPolar(abs(self), angle)
 
+    def normal(self):
+        return Vector(self.y, -self.x).unit()
+
     # TODO hacer un classmethod que cree el vector entre dos puntos
 
 

@@ -126,3 +126,6 @@ class TestVector(unittest.TestCase):
         self.assertEqual(distance_line_point(Vector(5, 2), (Vector(), Vector(100, 0))), 2)
         self.assertEqual(distance_line_point(Vector(100, 2), (Vector(), Vector(100, 0))), 2)
         self.assertEqual(distance_line_point(Vector(110, 2), (Vector(), Vector(100, 0))), 2)
+
+    def test_normal(self):
+        pass
