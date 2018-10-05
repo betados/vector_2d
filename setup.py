@@ -15,3 +15,5 @@ setup(
     keywords=['vector', '2d', 'physics', 'games', 'pygame'],
     url='https://github.com/betados/vector_2D',
 )
+# python setup.py sdist bdist_wheel
+# twine upload dist/*
