@@ -101,6 +101,10 @@ class Vector(object):
     def int(self):
         return int(self.__x), int(self.__y)
 
+    def int_vector(self):
+        # TODO it could do a true round if a parameter is passed
+        return Vector(int(self.__x), int(self.__y))
+
     def to_polar(self):
         """ converts the vector to polar coordinates """
         from vectorPolar import VectorPolar

@@ -129,3 +129,9 @@ class TestVector(unittest.TestCase):
 
     def test_normal(self):
         pass
+
+    def test_int_vector(self):
+        self.assertEqual(Vector(0.1, 0.1).int_vector(), Vector(0, 0))
+        self.assertEqual(Vector(0.9, 0.9).int_vector(), Vector(0, 0))
+        self.assertEqual(Vector(1.1, 1.1).int_vector(), Vector(1, 1))
+        self.assertEqual(Vector(1.1, 0.1).int_vector(), Vector(1, 0))
