@@ -3,8 +3,7 @@
 import unittest
 from math import pi
 
-from vector_2d.vector import Vector, angle, round_vector, distance_line_point
-from vector_2d.vectorPolar import VectorPolar
+from vector_2d import *
 
 
 class TestVector(unittest.TestCase):
