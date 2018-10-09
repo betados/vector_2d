@@ -48,6 +48,9 @@ class Vector(object):
     def __div__(self, scalar):
         return Vector(self.__x / scalar, self.__y / scalar)
 
+    def __truediv__(self, scalar):
+        return Vector(self.__x / scalar, self.__y / scalar)
+
     def unit(self):
         """
         Returns the unit vector correspondent to the original one
@@ -107,7 +110,7 @@ class Vector(object):
 
     def to_polar(self):
         """ converts the vector to polar coordinates """
-        from vectorPolar import VectorPolar
+        from vector_2d import VectorPolar
         angle = atan2(self.__y, self.__x)
         if angle < 0:
             angle = 2 * pi + angle

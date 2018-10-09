@@ -151,3 +151,7 @@ class TestVector(unittest.TestCase):
         self.assertEqual(Vector(0.9, 0.9).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(1.1, 1.1).int_vector(), Vector(1, 1))
         self.assertEqual(Vector(1.1, 0.1).int_vector(), Vector(1, 0))
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -19,7 +19,7 @@ class VectorPolar(object):
         return self.__angle
 
     def to_cartesian(self):
-        from vector import Vector
+        from vector_2d import Vector
         return Vector(cos(self.__angle), sin(self.__angle)) * self.__module
 
     def __repr__(self):
