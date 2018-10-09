@@ -142,12 +142,12 @@ class TestVector(unittest.TestCase):
         self.assertAlmostEqual(distance_point_segment(Vector(-10, -2), (Vector(), Vector(100, 0))), sqrt(104), places=6)
 
     def test_normal(self):
-        pass
+        self.assertEqual(Vector(-1, 0), round_vector(Vector(0, 1).normal()))
+        self.assertEqual(Vector(-1, 0), round_vector(Vector(0, 9).normal()))
+        self.assertEqual(round_vector(Vector(-sqrt(2)/2, sqrt(2)/2)), round_vector(Vector(9, 9).normal()))
 
     def test_int_vector(self):
         self.assertEqual(Vector(0.1, 0.1).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(0.9, 0.9).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(1.1, 1.1).int_vector(), Vector(1, 1))
         self.assertEqual(Vector(1.1, 0.1).int_vector(), Vector(1, 0))
-
-    # def assertAlmostEqual(self, first, second, places=None, msg=None, delta=None):

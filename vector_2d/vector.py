@@ -114,7 +114,7 @@ class Vector(object):
         return VectorPolar(abs(self), angle)
 
     def normal(self):
-        return Vector(self.y, -self.x).unit()
+        return self.to_polar().normal().to_cartesian().unit()
 
     # TODO hacer un classmethod que cree el vector entre dos puntos
 
