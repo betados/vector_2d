@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from math import cos, sin
+from __future__ import division
+
+from math import cos, pi, sin
 
 
 class VectorPolar(object):
@@ -33,6 +35,9 @@ class VectorPolar(object):
 
     def __add__(self, other):
         return (self.to_cartesian() + other.to_cartesian()).to_polar()
+
+    def normal(self):
+        return VectorPolar(self.__module, self.__angle + pi/2.0)
 
     def unit(self):
         return VectorPolar(1, self.__angle)

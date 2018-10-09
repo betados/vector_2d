@@ -12,3 +12,6 @@ class TestPolarVector(unittest.TestCase):
         self.assertEqual(VectorPolar(1, 0), round_vector(VectorPolar(6, 0) + VectorPolar(5, pi)))
         self.assertEqual(round_vector(VectorPolar(sqrt(2), pi / 4)),
                          round_vector(VectorPolar(1, 0) + VectorPolar(1, pi / 2)))
+
+    def test_normal(self):
+        self.assertEqual(round_vector(VectorPolar(1, pi / 2)), round_vector(VectorPolar(1, 0).normal()))
