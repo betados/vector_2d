@@ -139,13 +139,13 @@ def angle(first, second=Vector(1, 0)):
     return max(angles) - min(angles)
 
 
-def distance_line_point(point, line):
+def distance_point_line(point, line):
     """ Returns the distance between a point and a line. The line is given by a tuple of points """
     # TODO hacer que los puntos puedan ser polares
     p1, p2 = line
     return abs((p2.y - p1.y) * point.x - (p2.x - p1.x) * point.y + p2.x * p1.y - p2.y * p1.x) / abs(p1 - p2)
 
 
-def distance_segment_point(point, line):
+def distance_point_segment(point, line):
     raise NotImplementedError
-#     TODO ver si está "dentro" o "fuera" del segmento
+    # TODO ver si está "dentro" o "fuera" del segmento con el teorema del coseno
