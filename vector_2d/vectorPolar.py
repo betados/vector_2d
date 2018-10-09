@@ -31,5 +31,8 @@ class VectorPolar(object):
     def __iter__(self):
         return (i for i in (self.__module, self.__angle))
 
+    def __add__(self, other):
+        return (self.to_cartesian() + other.to_cartesian()).to_polar()
+
     def unit(self):
         return VectorPolar(1, self.__angle)
