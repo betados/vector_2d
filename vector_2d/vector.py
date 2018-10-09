@@ -114,6 +114,7 @@ class Vector(object):
         return VectorPolar(abs(self), angle)
 
     def normal(self):
+        # TODO que devuelva una tupla con las dos perpendiculares
         return self.to_polar().normal().to_cartesian().unit()
 
     # TODO hacer un classmethod que cree el vector entre dos puntos
