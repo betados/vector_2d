@@ -2,7 +2,7 @@
 
 from __future__ import division
 
-from math import atan2, hypot, pi
+from math import atan2, hypot, pi, acos
 
 
 class Vector(object):
@@ -147,5 +147,14 @@ def distance_point_line(point, line):
 
 
 def distance_point_segment(point, line):
-    raise NotImplementedError
-    # TODO ver si está "dentro" o "fuera" del segmento con el teorema del coseno
+    b = abs(line[0] - line[1])
+    angles = [0, 0]
+    for i in (0, 1):
+        a = abs(point - line[i])
+        c = abs(point - line[i - 1])
+        angles[i] = acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b))
+
+    if sum([1 if a > pi / 2.0 else 0 for a in angles]):
+        return min([abs(point - line[0]), abs(point - line[1])])
+    else:
+        return distance_point_line(point, line)

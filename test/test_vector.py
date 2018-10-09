@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from math import pi
+from math import pi, sqrt
 
 from vector_2d import *
 
@@ -120,11 +120,26 @@ class TestVector(unittest.TestCase):
     def test_rmul(self):
         self.assertEqual(0.5 * Vector(2, 2), Vector(1, 1))
 
-    def test_distance_line_point(self):
-        self.assertEqual(distance_line_point(Vector(5, 1), (Vector(), Vector(100, 0))), 1)
-        self.assertEqual(distance_line_point(Vector(5, 2), (Vector(), Vector(100, 0))), 2)
-        self.assertEqual(distance_line_point(Vector(100, 2), (Vector(), Vector(100, 0))), 2)
-        self.assertEqual(distance_line_point(Vector(110, 2), (Vector(), Vector(100, 0))), 2)
+    def test_distance_point_line(self):
+        self.assertEqual(distance_point_line(Vector(5, 1), (Vector(), Vector(100, 0))), 1)
+        self.assertEqual(distance_point_line(Vector(5, 2), (Vector(), Vector(100, 0))), 2)
+        self.assertEqual(distance_point_line(Vector(100, 2), (Vector(), Vector(100, 0))), 2)
+        self.assertEqual(distance_point_line(Vector(110, 2), (Vector(), Vector(100, 0))), 2)
+
+    def test_distance_point_segment(self):
+        # IN
+        self.assertEqual(distance_point_segment(Vector(100, 1), (Vector(), Vector(100, 0))), 1)
+        self.assertEqual(distance_point_segment(Vector(5, 2), (Vector(), Vector(100, 0))), 2)
+        self.assertEqual(distance_point_segment(Vector(100, 2), (Vector(), Vector(100, 0))), 2)
+
+        # OUT
+        self.assertEqual(distance_point_segment(Vector(2, 0), (Vector(), Vector(1, 0))), 1)
+        self.assertEqual(distance_point_segment(Vector(-1, 0), (Vector(), Vector(1, 0))), 1)
+        self.assertEqual(distance_point_segment(Vector(1, 1), (Vector(), Vector(1, 0))), 1)
+        self.assertEqual(distance_point_segment(Vector(0, 1), (Vector(), Vector(1, 0))), 1)
+        self.assertAlmostEqual(distance_point_segment(Vector(2, 1), (Vector(), Vector(1, 0))), sqrt(2), places=6)
+        self.assertAlmostEqual(distance_point_segment(Vector(110, 2), (Vector(), Vector(100, 0))), sqrt(104), places=6)
+        self.assertAlmostEqual(distance_point_segment(Vector(-10, -2), (Vector(), Vector(100, 0))), sqrt(104), places=6)
 
     def test_normal(self):
         pass
@@ -134,3 +149,5 @@ class TestVector(unittest.TestCase):
         self.assertEqual(Vector(0.9, 0.9).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(1.1, 1.1).int_vector(), Vector(1, 1))
         self.assertEqual(Vector(1.1, 0.1).int_vector(), Vector(1, 0))
+
+    # def assertAlmostEqual(self, first, second, places=None, msg=None, delta=None):
