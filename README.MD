@@ -11,6 +11,6 @@ A module witch implements a two-dimensional vector, both in cartesian and polar 
 
 ## Usage
 ``` python
-from vector_2D import Vector
-from vector_2D import VectorPolar
+from vector_2d import Vector
+from vector_2d import VectorPolar
 ```
