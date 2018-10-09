@@ -15,3 +15,4 @@ class TestPolarVector(unittest.TestCase):
 
     def test_normal(self):
         self.assertEqual(round_vector(VectorPolar(1, pi / 2)), round_vector(VectorPolar(1, 0).normal()))
+        self.assertEqual(round_vector(VectorPolar(1, pi)), round_vector(VectorPolar(1, pi / 2).normal()))
