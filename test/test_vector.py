@@ -9,7 +9,7 @@ from vector_2d import *
 class TestVector(unittest.TestCase):
     def test_repr(self):
         self.assertEqual(str(Vector(0, 0)), 'Vector(0, 0)')
-        self.assertEqual(str(VectorPolar(0, 0)), 'VectorPolar(0, 0 )')
+        self.assertEqual(str(VectorPolar(0, 0)), 'VectorPolar(0, 0  )')
 
     def test_abs(self):
         self.assertEqual(abs(Vector(0, 0)), 0)
