@@ -144,13 +144,16 @@ class TestVector(unittest.TestCase):
     def test_normal(self):
         self.assertEqual(Vector(-1, 0), round_vector(Vector(0, 1).normal()))
         self.assertEqual(Vector(-1, 0), round_vector(Vector(0, 9).normal()))
-        self.assertEqual(round_vector(Vector(-sqrt(2)/2, sqrt(2)/2)), round_vector(Vector(9, 9).normal()))
+        self.assertEqual(round_vector(Vector(-sqrt(2) / 2, sqrt(2) / 2)), round_vector(Vector(9, 9).normal()))
 
     def test_int_vector(self):
         self.assertEqual(Vector(0.1, 0.1).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(0.9, 0.9).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(1.1, 1.1).int_vector(), Vector(1, 1))
         self.assertEqual(Vector(1.1, 0.1).int_vector(), Vector(1, 0))
+
+    def test_cross_product(self):
+        self.assertEqual(Vector(1, 0) * Vector(0, 1), 1)
 
 
 if __name__ == '__main__':

@@ -34,8 +34,13 @@ class Vector(object):
         y = self.__y - other.y
         return Vector(x, y)
 
-    def __mul__(self, scalar):
-        return Vector(self.__x * scalar, self.__y * scalar)
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            # """Scalar product"""
+            return Vector(self.__x * other, self.__y * other)
+        if isinstance(other, Vector):
+            # "Cross product"
+            return self.x * other.y - self.y * self.x
 
     def __rmul__(self, scalar):
         return self * scalar
