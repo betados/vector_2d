@@ -154,6 +154,7 @@ class TestVector(unittest.TestCase):
 
     def test_cross_product(self):
         self.assertEqual(Vector(1, 0) * Vector(0, 1), 1)
+        self.assertEqual(Vector(5, 0) * Vector(0, 1), 5)
 
 
 if __name__ == '__main__':
