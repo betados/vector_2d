@@ -146,6 +146,8 @@ class TestVector(unittest.TestCase):
         self.assertEqual(Vector(-1, 0), round_vector(Vector(0, 9).normal()))
         self.assertEqual(round_vector(Vector(-sqrt(2) / 2, sqrt(2) / 2)), round_vector(Vector(9, 9).normal()))
 
+        self.assertEqual(round_vector(Vector(-9, 9)), round_vector(Vector(9, 9).normal(False)))
+
     def test_int_vector(self):
         self.assertEqual(Vector(0.1, 0.1).int_vector(), Vector(0, 0))
         self.assertEqual(Vector(0.9, 0.9).int_vector(), Vector(0, 0))
