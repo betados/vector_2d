@@ -3,12 +3,26 @@
 from __future__ import division
 
 from math import atan2, hypot, pi, acos
+from decimal import *
 
 
 class Vector(object):
+    using_decimal = False
+    format = float
+
     def __init__(self, x=0.0, y=0.0):
-        self.__x = x
-        self.__y = y
+        if Vector.using_decimal:
+            self.__x = Decimal(x)
+            self.__y = Decimal(y)
+
+        else:
+            self.__x = x
+            self.__y = y
+
+    @classmethod
+    def use_decimal(cls):
+        cls.using_decimal = True
+        cls.format = Decimal
 
     @property
     def x(self):
@@ -22,7 +36,7 @@ class Vector(object):
         return type(self).__name__ + '(%r, %r)' % (self.__x, self.__y)
 
     def __abs__(self):
-        return hypot(self.__x, self.__y)
+        return self.format(hypot(self.__x, self.__y))
 
     def __add__(self, other):
         x = self.__x + other.x
@@ -35,15 +49,16 @@ class Vector(object):
         return Vector(x, y)
 
     def __mul__(self, other):
-        if isinstance(other, (int, float)):
+        if isinstance(other, (int, float, Decimal)):
             # """Scalar product"""
             return Vector(self.__x * other, self.__y * other)
         if isinstance(other, Vector):
             # "Cross product"
             return self.x * other.y - self.y * self.x
+        raise TypeError
 
     def __rmul__(self, scalar):
-        return self * scalar
+        return self * self.format(scalar)
 
     def __pow__(self, power, modulo=None):
         if modulo:
@@ -54,7 +69,7 @@ class Vector(object):
         return Vector(self.__x / scalar, self.__y / scalar)
 
     def __truediv__(self, scalar):
-        return Vector(self.__x / scalar, self.__y / scalar)
+        return Vector(self.__x / self.format(scalar), self.__y / self.format(scalar))
 
     def unit(self):
         """
@@ -63,7 +78,7 @@ class Vector(object):
         module = abs(self)
         if module == 0:
             module = 99999999
-        return Vector(self.__x / float(module), self.__y / float(module))
+        return Vector(self.__x / self.format(module), self.__y / self.format(module))
 
     def get_comps(self, f=True):
         # TODO hacer que si se construye con valores enteros siempre devuelva valores enteros
@@ -116,6 +131,8 @@ class Vector(object):
     def to_polar(self):
         """ converts the vector to polar coordinates """
         from vector_2d import VectorPolar
+        if self.using_decimal:
+            VectorPolar.use_decimal()
         angle = atan2(self.__y, self.__x)
         if angle < 0:
             angle = 2 * pi + angle
@@ -129,43 +146,45 @@ class Vector(object):
 
     # TODO hacer un classmethod que cree el vector entre dos puntos
 
+    @classmethod
+    def round_vector(cls, vector, decimal_places=5):
+        """"
+            Return a vector with its components rounded.
+            It allow compare vectors ignoring precision errors due to how floats numbers are stored as binaries
+        """
+        return vector.__class__(*(round(attribute, decimal_places) for attribute in vector))
 
-def round_vector(vector, decimal_places=5):
-    """"
-        Return a vector with its components rounded.
-        It allow compare vectors ignoring precision errors due to how floats numbers are stored as binaries
-    """
-    return vector.__class__(*(round(attribute, decimal_places) for attribute in vector))
+    @classmethod
+    def angle(cls, first, second):
+        """
+            Returns the angle in radians between the two given vectors.
+            If only one is give the return is the angle between this and the horizontal.
+        """
+        angles = [atan2(*reversed(first.get_comps())), atan2(*reversed(second.get_comps()))]
+        for i in (0, 1):
+            if angles[i] < 0:
+                angles[i] = 2 * pi + angles[i]
+        return max(angles) - min(angles)
 
+    @classmethod
+    def distance_point_line(cls, point, line):
+        """ Returns the distance between a point and a line. The line is given by a tuple of points """
+        # TODO hacer que los puntos puedan ser polares
+        p1, p2 = line
+        return cls.format(
+            abs((p2.y - p1.y) * point.x - (p2.x - p1.x) * point.y + p2.x * p1.y - p2.y * p1.x)) / cls.format(
+            abs(p1 - p2))
 
-def angle(first, second=Vector(1, 0)):
-    """
-        Returns the angle in radians between the two given vectors.
-        If only one is give the return is the angle between this and the horizontal.
-    """
-    angles = [atan2(*reversed(first.get_comps())), atan2(*reversed(second.get_comps()))]
-    for i in (0, 1):
-        if angles[i] < 0:
-            angles[i] = 2 * pi + angles[i]
-    return max(angles) - min(angles)
+    @classmethod
+    def distance_point_segment(cls, point, line):
+        b = abs(line[0] - line[1])
+        angles = [0, 0]
+        for i in (0, 1):
+            a = abs(point - line[i])
+            c = abs(point - line[i - 1])
+            angles[i] = acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b))
 
-
-def distance_point_line(point, line):
-    """ Returns the distance between a point and a line. The line is given by a tuple of points """
-    # TODO hacer que los puntos puedan ser polares
-    p1, p2 = line
-    return abs((p2.y - p1.y) * point.x - (p2.x - p1.x) * point.y + p2.x * p1.y - p2.y * p1.x) / abs(p1 - p2)
-
-
-def distance_point_segment(point, line):
-    b = abs(line[0] - line[1])
-    angles = [0, 0]
-    for i in (0, 1):
-        a = abs(point - line[i])
-        c = abs(point - line[i - 1])
-        angles[i] = acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b))
-
-    if sum([1 if a > pi / 2.0 else 0 for a in angles]):
-        return min([abs(point - line[0]), abs(point - line[1])])
-    else:
-        return distance_point_line(point, line)
+        if sum([1 if a > pi / 2.0 else 0 for a in angles]):
+            return min([abs(point - line[0]), abs(point - line[1])])
+        else:
+            return Vector.distance_point_line(point, line)

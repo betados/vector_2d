@@ -3,12 +3,25 @@
 from __future__ import division
 
 from math import cos, pi, sin
+from decimal import *
 
 
 class VectorPolar(object):
+    using_decimal = False
+
     def __init__(self, module, angle):
-        self.__module = module
-        self.__angle = angle
+        if VectorPolar.using_decimal:
+            self.__module = Decimal(module)
+            self.__angle = Decimal(angle)
+            self.format = Decimal
+        else:
+            self.__module = module
+            self.__angle = angle
+            self.format = float
+
+    @classmethod
+    def use_decimal(cls):
+        cls.using_decimal = True
 
     @property
     def module(self):
@@ -20,7 +33,9 @@ class VectorPolar(object):
 
     def to_cartesian(self):
         from vector_2d import Vector
-        return Vector(cos(self.__angle), sin(self.__angle)) * self.__module
+        if Vector.using_decimal:
+            VectorPolar.use_decimal()
+        return Vector(cos(self.format(self.__angle)), sin(self.format(self.__angle))) * self.format(self.__module)
 
     def __repr__(self):
         return type(self).__name__ + '(%r, %r)' % (self.__module, self.__angle)
@@ -37,7 +52,7 @@ class VectorPolar(object):
         return (self.to_cartesian() + other.to_cartesian()).to_polar()
 
     def normal(self):
-        return VectorPolar(self.__module, self.__angle + pi/2.0)
+        return VectorPolar(self.__module, self.__angle + self.format(pi / 2.0))
 
     def unit(self):
         return VectorPolar(1, self.__angle)

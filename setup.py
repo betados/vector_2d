@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='vector_2d',
-    version='1.3.0',
+    version='1.4a0',
     description='A module witch implements a two-dimensional vector, both in cartesian and polar coordinates.',
     long_description=open('README.MD').read(),
     long_description_content_type='text/markdown',
