@@ -94,6 +94,7 @@ class Vector(object):
         return Vector(-self.__x, -self.__y)
 
     def __call__(self, comp=None):
+        # FIXME que esto sea sobrecargando []
         if comp is None:
             return self.get_comps()
         return self.get_comps()[comp]
