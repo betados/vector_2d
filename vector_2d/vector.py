@@ -163,6 +163,8 @@ def distance_point_segment(point, line):
     angles = [0, 0]
     for i in (0, 1):
         a = abs(point - line[i])
+        if a == 0:
+            return 0
         c = abs(point - line[i - 1])
         angles[i] = acos((a ** 2 + b ** 2 - c ** 2) / (2 * a * b))
 
