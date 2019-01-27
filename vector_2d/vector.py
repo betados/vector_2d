@@ -19,7 +19,7 @@ class Vector(object):
         return self.__y
 
     def __repr__(self):
-        return type(self).__name__ + '(%r, %r)' % (self.__x, self.__y)
+        return self.__class__.__name__ + f'({self.x}, {self.y})'
 
     def __abs__(self):
         return hypot(self.__x, self.__y)
