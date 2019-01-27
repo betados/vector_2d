@@ -65,6 +65,9 @@ class Vector(object):
             module = 99999999
         return Vector(self.__x / float(module), self.__y / float(module))
 
+    def __getitem__(self, item):
+        return (self.x, self.y)[item]
+
     def get_comps(self, f=True):
         # TODO hacer que si se construye con valores enteros siempre devuelva valores enteros
         # TODO hacer que si se construye con valores float siempre devuelva valores float
@@ -105,7 +108,7 @@ class Vector(object):
         return False
 
     def __iter__(self):
-        return (i for i in (self.x, self.y))
+        return iter((self.x, self.y))
 
     def int(self):
         return int(self.__x), int(self.__y)

@@ -48,6 +48,13 @@ class TestVector(unittest.TestCase):
         self.assertEqual(Vector(5.2, 1.5).get_comps(), (5.2, 1.5))
         self.assertEqual(Vector(5.2, 1.6).get_comps(False), (5, 1))
 
+    def test_getitem(self):
+        v = Vector(99, 17)
+        self.assertEqual(v[0], 99)
+        self.assertEqual(v[1], 17)
+        with self.assertRaises(IndexError):
+            v[2]
+
     def test_set_comp(self):
         vector = Vector(0, 0)
         vector.set_comp(0, 9)
