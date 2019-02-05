@@ -24,6 +24,7 @@ class Vector(object):
     def __abs__(self):
         return hypot(self.__x, self.__y)
 
+    # TODO add type hinting
     def __add__(self, other):
         x = self.__x + other.x
         y = self.__y + other.y
@@ -52,6 +53,8 @@ class Vector(object):
 
     def __div__(self, scalar):
         return Vector(self.__x / scalar, self.__y / scalar)
+
+    # TODO division entera
 
     def __truediv__(self, scalar):
         return Vector(self.__x / scalar, self.__y / scalar)
