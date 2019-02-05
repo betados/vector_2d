@@ -168,6 +168,15 @@ class TestVector(unittest.TestCase):
         self.assertEqual(Vector(1, 0) * Vector(0, 1), 1)
         self.assertEqual(Vector(5, 0) * Vector(0, 1), 5)
 
+    def test_hash(self):
+        my_set = set()
+        vector = Vector()
+        my_set.add(vector)
+        self.assertEquals(1, len(my_set))
+        my_set.add(vector)
+        self.assertEquals(1, len(my_set))
+        my_set.add(Vector(1, 0))
+        self.assertEquals(2, len(my_set))
 
 if __name__ == '__main__':
     unittest.main()

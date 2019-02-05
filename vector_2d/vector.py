@@ -71,6 +71,9 @@ class Vector(object):
     def __getitem__(self, item):
         return (self.x, self.y)[item]
 
+    def __hash__(self):
+        return hash((self.x, self.y))
+
     def get_comps(self, f=True):
         # TODO hacer que si se construye con valores enteros siempre devuelva valores enteros
         # TODO hacer que si se construye con valores float siempre devuelva valores float
