@@ -174,11 +174,12 @@ class TestVector(unittest.TestCase):
         my_set = set()
         vector = Vector()
         my_set.add(vector)
-        self.assertEquals(1, len(my_set))
+        self.assertEqual(1, len(my_set))
         my_set.add(vector)
-        self.assertEquals(1, len(my_set))
+        self.assertEqual(1, len(my_set))
         my_set.add(Vector(1, 0))
-        self.assertEquals(2, len(my_set))
+        self.assertEqual(2, len(my_set))
+
 
 if __name__ == '__main__':
     unittest.main()
