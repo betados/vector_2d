@@ -7,7 +7,7 @@ from math import atan2, hypot, pi, acos
 
 
 class Vector(object):
-    def __init__(self, x=0.0, y=0.0):
+    def __init__(self, x: float = 0.0, y: float = 0.0):
         self.__x = x
         self.__y = y
 
@@ -140,7 +140,7 @@ class Vector(object):
     # TODO hacer un classmethod que cree el vector entre dos puntos
 
 
-def round_vector(vector: Vector, decimal_places: int=5):
+def round_vector(vector, decimal_places: int = 5):
     """"
         Return a vector with its components rounded.
         It allow compare vectors ignoring precision errors due to how floats numbers are stored as binaries

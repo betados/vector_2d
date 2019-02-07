@@ -6,26 +6,26 @@ from math import cos, pi, sin
 
 
 class VectorPolar(object):
-    def __init__(self, module, angle):
+    def __init__(self, module: float, angle: float):
         self.__module = module
         self.__angle = angle
 
     @property
-    def module(self):
+    def module(self) -> float:
         return self.__module
 
     @property
-    def angle(self):
+    def angle(self) -> float:
         return self.__angle
 
-    def to_cartesian(self):
+    def to_cartesian(self) -> 'Vector':
         from vector_2d import Vector
         return Vector(cos(self.__angle), sin(self.__angle)) * self.__module
 
     def __repr__(self):
         return type(self).__name__ + '(%r, %r)' % (self.__module, self.__angle)
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'VectorPolar') -> bool:
         if other.module == self.__module and other.angle == self.__angle:
             return True
         return False
@@ -36,8 +36,8 @@ class VectorPolar(object):
     def __add__(self, other):
         return (self.to_cartesian() + other.to_cartesian()).to_polar()
 
-    def normal(self):
+    def normal(self) -> 'VectorPolar':
         return VectorPolar(self.__module, self.__angle + pi/2.0)
 
-    def unit(self):
+    def unit(self) -> 'VectorPolar':
         return VectorPolar(1, self.__angle)
