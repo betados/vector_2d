@@ -120,8 +120,7 @@ class Vector(object):
         return int(self.__x), int(self.__y)
 
     def int_vector(self):
-        # TODO it could do a true round if a parameter is passed
-        return Vector(int(self.__x), int(self.__y))
+        return Vector(round(self.__x, 0), round(self.__y, 0))
 
     def to_polar(self):
         """ converts the vector to polar coordinates """
